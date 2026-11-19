@@ -26,30 +26,11 @@ jobs:
         env:
           VITE_FORMSPREE_ID: ${{ secrets.VITE_FORMSPREE_ID }}
 
-      # Normalizes FTP_SERVER to a bare hostname (strips whitespace, ftp:// prefix, path, port)
-      # and checks that it resolves, so a pasted-in typo fails with a clear message.
-      - name: Check FTP host
-        id: ftp
-        env:
-          RAW: ${{ secrets.FTP_SERVER }}
-        run: |
-          host=$(printf '%s' "$RAW" | tr -d '[:space:]' | sed -E 's#^[a-zA-Z]+://##; s#/.*$##; s#:[0-9]+$##')
-          echo "::add-mask::$host"
-          echo "raw length: ${#RAW}, cleaned length: ${#host}"
-          [ "$RAW" != "$host" ] && echo "::warning::FTP_SERVER contained extra characters (whitespace, protocol, path or port); they were stripped."
-          if getent hosts "$host" > /dev/null; then
-            echo "FTP host resolves."
-          else
-            echo "::error::FTP_SERVER does not resolve as a hostname. Set it to the exact host from the SmarterASP control panel."
-            exit 1
-          fi
-          echo "host=$host" >> "$GITHUB_OUTPUT"
-
       # Uploads only changed files; removes files it previously uploaded that no longer exist in dist/.
       - name: Upload dist/ via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          server: ${{ steps.ftp.outputs.host }}
+          server: winXXXX.site4now.net
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftps
