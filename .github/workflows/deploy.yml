@@ -43,5 +43,5 @@ jobs:
             set ftp:passive-mode true;
             set net:max-retries 3;
             set net:timeout 30;
-            mirror --reverse --verbose --parallel=4 dist/ '${FTP_SERVER_DIR:-.}';
+            mirror --reverse --no-perms --verbose --parallel=4 dist/ '${FTP_SERVER_DIR:-.}';
             bye"
