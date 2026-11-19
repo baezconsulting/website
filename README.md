@@ -32,7 +32,7 @@ Deployment is automatic: every push to `main` runs `.github/workflows/deploy.yml
 
 Required GitHub repo secrets (Settings → Secrets and variables → Actions):
 
-- `FTP_HOST` – FTP host, exactly `winXXXX.site4now.net` (secret or repo variable)
+- `FTP_HOST` – FTP host from the SmarterASP control panel (e.g. `winXXXX.site4now.net`)
 - `FTP_USERNAME` / `FTP_PASSWORD` – the site's FTP account
 - `VITE_FORMSPREE_ID` – optional, enables the contact form
 

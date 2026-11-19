@@ -47,7 +47,7 @@ jobs:
           echo "FTP_HOST: ${raw_bytes} bytes stored, ${#host} after cleanup"
           [ "$raw_bytes" -ne "${#host}" ] && echo "::warning::FTP_HOST contained $((raw_bytes - ${#host})) extra/invisible bytes; they were stripped. Consider retyping the secret."
           if ! getent hosts "$host" > /dev/null; then
-            echo "::error::FTP_HOST (secret or variable) does not resolve. It should be exactly: winXXXX.site4now.net"
+            echo "::error::FTP_HOST (secret or variable) does not resolve. Set it to the FTP host from the SmarterASP control panel."
             exit 1
           fi
           dir="${FTP_SERVER_DIR:-.}"
