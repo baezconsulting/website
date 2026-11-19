@@ -5,7 +5,7 @@ React + Vite + Tailwind CSS + Motion. Static site, no database.
 ## Run locally (Mac)
 
 ```bash
-cd ~/Downloads/baez-consulting
+cd ~/projects/baez-consulting
 npm install
 npm run dev
 ```
@@ -28,6 +28,12 @@ Without a Formspree ID, the form opens the visitor's email app addressed to cont
 
 ## Deploy to SmarterASP.NET
 
-1. Run `npm run build`.
-2. Upload the contents of `dist/` (not the folder itself) to the site root using the control panel's File Manager or FTP.
-3. On each update, rebuild and replace the old `assets` folder.
+Deployment is automatic: every push to `main` runs `.github/workflows/deploy.yml`, which builds the site and uploads `dist/` to SmarterASP.NET over FTPS (only changed files are sent). You can also run it by hand from the repo's **Actions** tab.
+
+Required GitHub repo secrets (Settings → Secrets and variables → Actions):
+
+- `FTP_SERVER` – FTP host from the SmarterASP control panel (e.g. `winXXXX.site4now.net`)
+- `FTP_USERNAME` / `FTP_PASSWORD` – the site's FTP account
+- `VITE_FORMSPREE_ID` – optional, enables the contact form
+
+Optional repo variable `FTP_SERVER_DIR` if the FTP login doesn't land in the site root (e.g. `/site1/`). Defaults to `./`.
