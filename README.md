@@ -32,7 +32,7 @@ Deployment is automatic: every push to `main` runs `.github/workflows/deploy.yml
 
 Required GitHub repo secrets (Settings → Secrets and variables → Actions):
 
-- `FTP_SERVER` – FTP host, exactly `winXXXX.site4now.net`
+- `FTP_HOST` – FTP host, exactly `winXXXX.site4now.net` (secret or repo variable)
 - `FTP_USERNAME` / `FTP_PASSWORD` – the site's FTP account
 - `VITE_FORMSPREE_ID` – optional, enables the contact form
 
