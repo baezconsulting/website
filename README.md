@@ -28,7 +28,7 @@ Without a Formspree ID, the form opens the visitor's email app addressed to cont
 
 ## Deploy to SmarterASP.NET
 
-Deployment is automatic: every push to `main` runs `.github/workflows/deploy.yml`, which builds the site and uploads `dist/` to SmarterASP.NET over FTPS (only changed files are sent). You can also run it by hand from the repo's **Actions** tab.
+Deployment is automatic: every push to `main` runs `.github/workflows/deploy.yml`, which builds the site and uploads `dist/` to SmarterASP.NET over FTPS using lftp. You can also run it by hand from the repo's **Actions** tab.
 
 The FTP host (`winXXXX.site4now.net`) is set in the workflow file. Required GitHub repo secrets (Settings → Secrets and variables → Actions):
 
