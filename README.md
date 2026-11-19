@@ -28,10 +28,11 @@ Without a Formspree ID, the form opens the visitor's email app addressed to cont
 
 ## Deploy to SmarterASP.NET
 
-Deployment is automatic: every push to `main` runs `.github/workflows/deploy.yml`, which builds the site and uploads `dist/` to SmarterASP.NET over FTPS using lftp. You can also run it by hand from the repo's **Actions** tab.
+Deployment is automatic: every push to `main` runs `.github/workflows/deploy.yml`, which builds the site and uploads `dist/` to SmarterASP.NET over FTPS using lftp. Old build files in `assets/` are removed; nothing else on the server is deleted. You can also run it by hand from the repo's **Actions** tab.
 
-The FTP host (`winXXXX.site4now.net`) is set in the workflow file. Required GitHub repo secrets (Settings → Secrets and variables → Actions):
+Required GitHub repo secrets (Settings → Secrets and variables → Actions):
 
+- `FTP_SERVER` – FTP host, exactly `winXXXX.site4now.net`
 - `FTP_USERNAME` / `FTP_PASSWORD` – the site's FTP account
 - `VITE_FORMSPREE_ID` – optional, enables the contact form
 
