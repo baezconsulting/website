@@ -47,6 +47,7 @@ export const expertise = [
   'security',
   'scalability',
   'high availability',
+  'migrations & upgrades',
 ]
 
 export const leader = {
