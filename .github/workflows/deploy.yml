@@ -40,7 +40,12 @@ jobs:
           LFTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
           FTP_SERVER_DIR: ${{ vars.FTP_SERVER_DIR }}
         run: |
-          host=$(printf '%s' "$FTP_SERVER" | tr -d '[:space:]')
+          # Keep only hostname characters; drops pasted invisible chars (zero-width/non-breaking spaces).
+          host=$(printf '%s' "$FTP_SERVER" | sed -E 's#^[a-zA-Z]+://##' | LC_ALL=C tr -cd 'A-Za-z0-9.-')
+          echo "::add-mask::$host"
+          raw_bytes=$(printf '%s' "$FTP_SERVER" | wc -c)
+          echo "FTP_SERVER: ${raw_bytes} bytes stored, ${#host} after cleanup"
+          [ "$raw_bytes" -ne "${#host}" ] && echo "::warning::FTP_SERVER contained $((raw_bytes - ${#host})) extra/invisible bytes; they were stripped. Consider retyping the secret."
           if ! getent hosts "$host" > /dev/null; then
             echo "::error::FTP_SERVER secret does not resolve. It should be exactly: winXXXX.site4now.net"
             exit 1
